@@ -1,18 +1,10 @@
-package jianzhiOffer
+package main
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
+	"fmt"
 )
 
-func Test(t *testing.T){
-	result1 := findRepeatNumber1([]int{2,3,3,4,1})
-	assert.Equal(t,result1,3)
-	result2 := findRepeatNumber2([]int{2,3,3,4,1})
-	assert.Equal(t,result2,3)
-	result3 := findRepeatNumber3([]int{2,3,3,4,1})
-	assert.Equal(t,result3,3)
-}
+
 func spiralOrder(matrix [][]int) []int {
     if(len(matrix)==0){
         return []int{}
@@ -24,40 +16,46 @@ func spiralOrder(matrix [][]int) []int {
 				res[x]=matrix[top][i]
 				x++
 			}
-			
+			top++
             if(top>bottom){
                 break;
 			}
-			top++
+			
             for i := top ;i<bottom+1;i++{
 				res[x]=matrix[i][right]
 				x++
 			}
-			
+			right--
             if(left>right){
                 break;
 			}
-			right--
+			
             for i:= right;left<i+1;i--{
 				res[x]=matrix[bottom][i]
 				x++
 			}
-			
+			bottom--
             if(top>bottom){
                 break;
 			}
-			bottom--
+			
             for i :=bottom;top<i+1;i--{
 				res[x]=matrix[i][left]
 				x++
 			}
-			
+			left++
             if(left>right){
                 break
 			}
-			left++
-			fmt.Printf("res:%v",res)
+			
+			fmt.Println(res)
 		}
 		return res
 	}
 }
+
+func main(){
+	res := spiralOrder([][]int{{1,2,3},{4,5,6},{7,8,9}})
+	fmt.Println(res)
+}
+	
