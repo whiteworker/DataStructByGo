@@ -10,7 +10,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceRoot}/src/jianzhiOffer/reverseWord/reverseWord.go",
+            "program": "${workspaceRoot}/src/jianzhiOffer/mergeTwoList/mergeTwoList.go",
             "env": {},
             "args": []
         }

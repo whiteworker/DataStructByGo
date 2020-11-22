@@ -1,7 +1,6 @@
 package main
 import (
 	"fmt"
-	"container/list"
 )
 
 type CQueue struct {
@@ -21,25 +20,24 @@ func (this *CQueue) AppendTail(value int)  {
 
 func (this *CQueue) DeleteHead() int {
     // 如果第二个栈为空
-    if this.stack2.Len() == 0 {
-        for this.stack1.Len() > 0 {
-            this.stack2.PushBack(this.stack1.Remove(this.stack1.Back()))
+    if this.stack2.Length == 0 {
+        for this.stack1.Length > 0 {
+            this.stack2.Push(this.stack1.Pop())
         }
     }
-    if this.stack2.Len() != 0 {
-        e := this.stack2.Back()
-        this.stack2.Remove(e)
-        return e.Value.(int)
+    if this.stack2.Length != 0 {
+        e := this.stack2.Pop()
+        return e
     }
     return -1
 }
 func main(){
-    test :=Queue{}
 	queue := Constructor()
 	queue.AppendTail(1)
 	queue.AppendTail(2)
 	queue.AppendTail(3)
-	queue.DeleteHead()
+    queue.DeleteHead()
+    queue.DeleteHead()
 	fmt.Printf("stack1:%v stack2:%v",queue.stack1,queue.stack2)
 }
 
@@ -53,18 +51,17 @@ func NewStack()*Stack{
         Length: 0,
     }
 }
-func Push(s *Stack)(num int ){
+func (s *Stack)Push(num int ){
     s.List=append(s.List,num)
+    s.Length++
 }
-func Pop(stack *Stack)int{
-    length := len(stack.List)
-    if length>0{
-        lastIndex := length-1;
-        res := stack.List[lastIndex]
-        stack.List=stack.List[:lastIndex-1]
+func (stack *Stack)Pop() int{
+    if stack.Length>0{
+        res := stack.List[stack.Length-1]
+        stack.List=stack.List[:stack.Length-1]
+        stack.Length--
+        return res
     } else{
         return -1
     }
-    
 }
-
