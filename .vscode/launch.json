@@ -10,7 +10,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceRoot}/src/jianzhiOffer/mergeTwoList/mergeTwoList.go",
+            "program": "${workspaceRoot}/src/base/quick_sort/quick_sort.go",
             "env": {},
             "args": []
         }

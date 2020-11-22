@@ -1,20 +1,19 @@
 package main
 import "fmt"
 func Quick_Sort(array []int, start int, end int){
-	if (start<end) {
-		i :=start
-		j :=end
-		key :=array[start]
-		for(i<j){
-			//右边小
-			for(i<j&&array[j]>=key){
+	if start<end{
+		mid := array[start]
+		i,j := start,end
+		for i<j {
+			//从右找比mid小
+			for i<j && array[j]>=mid{
 				j--
 			}
-			if (i<j) {
+			if(i<j){
 				array[i]=array[j]
 				i++
 			}
-			for(i<j&&array[i]<=key){
+			for (i<j)&&array[i]<=mid{
 				i++
 			}
 			if(i<j){
@@ -22,7 +21,7 @@ func Quick_Sort(array []int, start int, end int){
 				j--
 			}
 		}
-		array[i]=key;
+		array[i]=mid
 		Quick_Sort(array,start,i-1)
 		Quick_Sort(array,i+1,end)
 	}
