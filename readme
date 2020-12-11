@@ -1,0 +1,2 @@
+"github.com/stretchr/testify/assert"
+go env -w GO111MODULE=on

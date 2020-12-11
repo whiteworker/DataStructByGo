@@ -2,7 +2,6 @@ package concurrent
 
 import (
 	"fmt"
-	"strings"
 	"sync"
 )
 
@@ -32,21 +31,21 @@ func PrintLetterAndNumber() {
 		for {
 			select {
 			case <-letter:
-				if i >= strings.Count(str, "")-1 {
+				if i >= len(str)-1 {
 					//i = 0
 					wait.Done()
 					break
 				}
 				fmt.Print(str[i : i+1])
 				i++
-				if i >= strings.Count(str, "")-1 {
+				if i >= len(str)-1 {
 					//i = 0
 					number <- true
 					break
 				}
 				fmt.Print(str[i : i+1])
 				i++
-				if i >= strings.Count(str, "")-1 {
+				if i >= len(str)-1 {
 					//i = 0
 					number <- true
 					break
