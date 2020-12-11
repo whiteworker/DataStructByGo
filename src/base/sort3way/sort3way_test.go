@@ -1,4 +1,4 @@
-package main
+package sort3way
 
 import (
 	"testing"

@@ -28,15 +28,13 @@ func WaitTimeout(wg *sync.WaitGroup, timeout time.Duration) bool {
     // 要求sync.WaitGroup支持timeout功能
     // 如果timeout到了超时时间返回true
     // 如果WaitGroup自然结束返回false
-	ch := make(chan bool)
-	go time.AfterFunc(timeout, func() {
-		ch <- true
-	})
-
-	go func() {
-		wg.Wait()
-		ch <- false
-	}()
-	
-	return <- ch
+    ch := make(chan bool)
+    go time.AfterFunc(timeout,func(){
+        ch<-true
+    })
+    go func(){
+        wg.Wait()
+        ch<-false
+    }()
+    return <-ch
 }
