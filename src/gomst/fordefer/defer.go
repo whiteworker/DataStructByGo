@@ -54,12 +54,12 @@ func f7() (r int) {
 	return 1
 }
 func main() {
-	// f1()
-	// f2()
-	// f3()
-	// f4()
-	// f5()
+	//f1()
+	//f2()
+	//f3()
+	//fmt.Printf("%v", f4())
+	fmt.Printf("%v", f5())
 	// f6()
 	// f7()
-	fmt.Print(f5())
+	//fmt.Print(f5())
 }
