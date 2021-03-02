@@ -1,39 +1,34 @@
 package main
 
-import "fmt"
+// 带缓冲区的channel
 
-func Producer(ch chan int) {
-	for i := 1; i <= 10; i++ {
+import (
+	"fmt"
+	"sync"
+)
+
+func produce(wg *sync.WaitGroup, ch chan<- int) {
+	for i := 0; i < 100; i++ {
 		ch <- i
+		fmt.Println("Send:", i)
 	}
-	close(ch)
+	wg.Done()
 }
 
-func Consumer(id int, ch chan int, done chan bool) {
-	for {
-		value, ok := <-ch
-		if ok {
-			fmt.Printf("id: %d, recv: %d\n", id, value)
-		} else {
-			fmt.Printf("id: %d, closed\n", id)
-			break
-		}
+func consumer(wg *sync.WaitGroup, ch <-chan int) {
+	for i := 0; i < 100; i++ {
+		v := <-ch
+		fmt.Println("Receive:", v)
 	}
-	done <- true
+	wg.Done()
 }
 
 func main() {
-	ch := make(chan int, 3)
-
-	coNum := 2
-	done := make(chan bool, coNum)
-	for i := 1; i <= coNum; i++ {
-		go Consumer(i, ch, done)
-	}
-
-	go Producer(ch)
-
-	for i := 1; i <= coNum; i++ {
-		<-done
-	}
+	var wg sync.WaitGroup
+	ch := make(chan int, 10)
+	wg.Add(2)
+	go produce(&wg, ch)
+	go consumer(&wg, ch)
+	wg.Wait()
+	fmt.Println("ok")
 }

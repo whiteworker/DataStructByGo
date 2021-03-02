@@ -1,0 +1,4 @@
+2021/03/02 23:01:50 main.go:29: dj login, age:18
+2021/03/02 23:01:50 main.go:30: 
+ writer12021/03/02 23:01:50 main.go:29: dj login, age:18
+ 
