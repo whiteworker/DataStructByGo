@@ -1,0 +1,4 @@
+[info]2021/03/02 23:13:17         main.go: 179 - [hello info]
+[info]2021/03/02 23:13:17         main.go: 184 - [hello info test kkkkkk]
+[warn]2021/03/02 23:13:17 C:/code/DataStructByGo/big/filelogger/main.go:185: [hello waring warn1 ,warn2]
+[err]2021/03/02 23:13:17 main.go:186: [hello err err1 error2]
