@@ -32,6 +32,7 @@ type ELog struct {
 	infoLogger *fileLogger
 	warnLogger *fileLogger
 	errLogger  *fileLogger
+	//logChan    chan interface{}
 }
 
 func (l *ELog) Info(v ...interface{}) {
@@ -54,10 +55,34 @@ func (l *ELog) Info(v ...interface{}) {
 	l.infoLogger.logger.Printf("%15s:%4d - %s", file, line, v)
 }
 
+// 后台处理日志
+// func (f *ELog) flushBackGroup() {
+// 	// 循环从通道中接收数据并记录到文件
+// 	for {
+// 		select {
+// 		// 从通道中获取数据, 并写入文件
+// 		case tempLog := <-f.logChan:
+// 			_, file, line, ok := runtime.Caller(1)
+// 			if !ok {
+// 				file = "unknow"
+// 				line = 0
+// 			} else {
+// 				file = filepath.Base(file)
+// 			}
+// 			//这里先使用runtime.Caller获取文件名和行号，后标准化输出
+// 			// 下面的Warn()函数直接使用log.logger.Outpu()函数指明调用者的文件名和行号，两种方式都OK
+// 			l.infoLogger.logger.Printf("%15s:%4d - %s", file, line, v)
+// 		default:
+// 			// 通道中没有数据, 就休眠500毫秒
+// 			time.Sleep(time.Millisecond * 500)
+// 		}
+// 	}
+// }
+
 func (l *ELog) Warn(v ...interface{}) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
-
+	//l.logChan <- v
 	if l.minLevel > WarnLevel {
 		return
 	}
@@ -129,6 +154,7 @@ func NewLogger(level int, logPath string, logFile string) *ELog {
 		warnLogger: warnLogFile,
 		errLogger:  errLogFile,
 		minLevel:   level,
+		//logChan:    make(chan interface{}, 20000),
 	}
 	return l
 }
