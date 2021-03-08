@@ -10,7 +10,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceRoot}/src/gomst/channel/close/close.go",
+            "program": "${workspaceRoot}/big/bloomfilter/main.go",
             "env": {},
             "args": []
         }
