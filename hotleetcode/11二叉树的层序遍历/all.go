@@ -32,38 +32,38 @@ func threeOrders(root *TreeNode) [][]int {
 	return [][]int{pre, in, post}
 }
 func preorder(root *TreeNode) []int {
-	t := root
+	res := []int{}
+	curr := root
 	stack := list.New()
-	res := make([]int, 0)
-	for t != nil || stack.Len() != 0 {
-		for t != nil {
-			res = append(res, t.Val) //visit
-			stack.PushBack(t)
-			t = t.Left
+	for curr != nil || stack.Len() != 0 {
+		for curr != nil {
+			res = append(res, curr.Val) //visit
+			stack.PushBack(curr)
+			curr = curr.Left
 		}
 		if stack.Len() != 0 {
 			v := stack.Back()
-			t = v.Value.(*TreeNode)
-			t = t.Right
+			curr = v.Value.(*TreeNode)
+			curr = curr.Right
 			stack.Remove(v)
 		}
 	}
 	return res
 }
 func inorder(root *TreeNode) []int {
-	t := root
+	curr := root
 	stack := list.New()
 	res := make([]int, 0)
-	for t != nil || stack.Len() != 0 {
-		for t != nil {
-			stack.PushBack(t)
-			t = t.Left
+	for curr != nil || stack.Len() != 0 {
+		for curr != nil {
+			stack.PushBack(curr)
+			curr = curr.Left
 		}
 		if stack.Len() != 0 {
 			v := stack.Back()
-			t = v.Value.(*TreeNode)
-			res = append(res, t.Val) //visit
-			t = t.Right
+			curr = v.Value.(*TreeNode)
+			res = append(res, curr.Val) //visit
+			curr = curr.Right
 			stack.Remove(v)
 		}
 	}
