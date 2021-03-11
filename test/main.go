@@ -1,44 +1,32 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
+var stack1 []int
+var stack2 []int
+
+func Push(node int) {
+	stack1 = append(stack1, node)
+}
+
+func Pop() int {
+	if len(stack2) == 0 {
+		for _, value := range stack1 {
+			stack2 = append(stack2, value)
+		}
+		stack1 = []int{}
+	}
+
+	if len(stack2) > 0 {
+		res := stack2[0]
+		stack2 = stack2[1:len(stack2)]
+		return res
+	}
+	return -1
+}
 func main() {
-
-	list := &SingleList{val: 1, next: &SingleList{val: 2, next: &SingleList{val: 3, next: nil}}}
-	list.ShowList()
-	Reverse(list).ShowList()
-}
-
-type SingleList struct {
-	val  int
-	next *SingleList
-}
-
-func (s *SingleList) ShowList() {
-	if s == nil {
-		return
-	}
-	curr := s
-	for curr != nil {
-		fmt.Printf("%v", curr.val)
-		curr = curr.next
-	}
-	fmt.Printf("\n")
-}
-
-func Reverse(head *SingleList) *SingleList {
-	if head == nil {
-		return nil
-	}
-	var curr *SingleList
-	prev := head
-	for prev != nil {
-		temp := prev.next
-		prev.next = curr
-		curr = prev
-		prev = temp
-	}
-	return curr
+	Push(1)
+	Push(2)
+	Push(3)
+	fmt.Println(Pop())
 }

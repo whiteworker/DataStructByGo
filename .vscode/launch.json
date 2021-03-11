@@ -10,7 +10,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceRoot}/big/bloomfilter/main.go",
+            "program": "${workspaceRoot}/hotleetcode/23合并K个升序数组/main.go",
             "env": {},
             "args": []
         }

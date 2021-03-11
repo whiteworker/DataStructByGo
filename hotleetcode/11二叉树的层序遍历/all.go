@@ -4,19 +4,6 @@ import (
 	"container/list"
 )
 
-/*
- * type TreeNode struct {
- *   Val int
- *   Left *TreeNode
- *   Right *TreeNode
- * }
- */
-
-/**
- *
- * @param root TreeNode类 the root of binary tree
- * @return int整型二维数组 https://blog.csdn.net/wade3015/article/details/106897792
- */
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -32,44 +19,39 @@ func threeOrders(root *TreeNode) [][]int {
 	return [][]int{pre, in, post}
 }
 func preorder(root *TreeNode) []int {
-	res := []int{}
-	curr := root
-	stack := list.New()
-	for curr != nil || stack.Len() != 0 {
-		for curr != nil {
-			res = append(res, curr.Val) //visit
-			stack.PushBack(curr)
-			curr = curr.Left
-		}
-		if stack.Len() != 0 {
-			v := stack.Back()
-			curr = v.Value.(*TreeNode)
-			curr = curr.Right
-			stack.Remove(v)
-		}
-	}
-	return res
-}
-func inorder(root *TreeNode) []int {
-	curr := root
-	stack := list.New()
 	res := make([]int, 0)
+	curr := root
+	stack := list.New()
 	for curr != nil || stack.Len() != 0 {
 		for curr != nil {
+			res = append(res, curr.Val) //visit
 			stack.PushBack(curr)
 			curr = curr.Left
 		}
-		if stack.Len() != 0 {
-			v := stack.Back()
-			curr = v.Value.(*TreeNode)
-			res = append(res, curr.Val) //visit
+		for stack.Len() != 0 {
+			r := stack.Back()
+			curr := r.Value.(*TreeNode)
 			curr = curr.Right
-			stack.Remove(v)
+			stack.Remove(r)
 		}
 	}
 	return res
-
 }
+func inorderTraversal(root *TreeNode) (res []int) {
+	stack := []*TreeNode{}
+	for root != nil || len(stack) > 0 {
+		for root != nil {
+			stack = append(stack, root)
+			root = root.Left
+		}
+		root = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		res = append(res, root.Val)
+		root = root.Right
+	}
+	return
+}
+
 func postorder(root *TreeNode, res *[]int) {
 	if root == nil {
 		return

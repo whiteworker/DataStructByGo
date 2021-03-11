@@ -1,3 +1,7 @@
+package main
+
+import "fmt"
+
 func rightSideView(root *TreeNode) []int {
 	if root == nil {
 		return []int{}
@@ -20,4 +24,15 @@ func rightSideView(root *TreeNode) []int {
 		}
 	}
 	return res
+}
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func main() {
+	tree := &TreeNode{Val: 1, Left: &TreeNode{Val: 2}, Right: &TreeNode{Val: 3}}
+	fmt.Println(rightSideView(tree))
 }
