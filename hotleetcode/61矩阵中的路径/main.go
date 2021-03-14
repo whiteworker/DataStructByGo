@@ -1,4 +1,5 @@
 package main
+import "fmt"
 func exist(board [][]byte, word string) bool {
 	m,n := len(board), len(board[0])
 	for i := 0; i < m; i++ {
@@ -42,4 +43,13 @@ func exist(board [][]byte, word string) bool {
  
    
 	 return false
+ }
+ func main(){
+	 board  := [][]byte{
+		 []byte{'1','2','3'},
+		 []byte{'4','5','6'},
+		 []byte{'7','8','9'},
+		}
+	 res := exist(board,"149")
+	 fmt.Println(res)
  }
