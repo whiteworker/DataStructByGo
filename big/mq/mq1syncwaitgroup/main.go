@@ -22,7 +22,18 @@ func consumer(wg *sync.WaitGroup, ch <-chan int) {
 	}
 	wg.Done()
 }
-
+func Producer(cdata chan int, step int) {
+	for i := 0; ; i += step {
+		cdata <- i
+	}
+}
+func Consumer(cdata chan int) {
+	for {
+		if v, ok := <-cdata; ok {
+			fmt.Println(v)
+		}
+	}
+}
 func main() {
 	var wg sync.WaitGroup
 	ch := make(chan int, 10)
