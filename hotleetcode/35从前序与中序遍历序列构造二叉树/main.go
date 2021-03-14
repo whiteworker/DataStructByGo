@@ -9,7 +9,7 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 			break
 		}
 	}
-	root.Left = buildTree(preorder[1:len(inorder[:i])+1], inorder[:i])
+	root.Left = buildTree(preorder[1:len(inorder[:i])+1], inorder[:i])//第一个root 到 中序遍历的根节点
 	root.Right = buildTree(preorder[len(inorder[:i])+1:], inorder[i+1:])
 	return root
 }
