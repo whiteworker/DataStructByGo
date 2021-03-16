@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+    "fmt"
+    "time"
+)    
 
 func read(ch1 chan int,ch2 chan bool){
     for{       
@@ -38,5 +41,6 @@ func main() {
     go write(ch1)
     go read(ch1,ch2)
 
-    <-ch2
+    //<-ch2
+    time.Sleep(time.Second*2)
 }
