@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func Producer(cdata chan int, step int) {
+func Producer(cdata chan<- int, step int) {
 	for i := 0; ; i += step {
 		cdata <- i
 	}
