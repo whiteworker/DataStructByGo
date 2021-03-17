@@ -9,6 +9,7 @@ func findKthLargest(nums []int, k int) int {
 		nums[0], nums[i] = nums[i], nums[0]
 		heapSize--
 		maxHeapify(nums, 0, heapSize)
+		fmt.Println(nums,nums[0])
 	}
 	return nums[0]
 }
@@ -35,5 +36,5 @@ func maxHeapify(a []int, i, heapSize int) {
 
 func main() {
 	nums := []int{1, 2, 3, 4, 5}
-	fmt.Println(findKthLargest(nums, 2))
+	fmt.Println(findKthLargest(nums, 5))
 }
