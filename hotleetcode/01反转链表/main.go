@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type ListNode struct {
 	Val  int
@@ -31,6 +34,13 @@ func reverseList(head *ListNode) *ListNode {
 func main() {
 	list := &ListNode{Val: 1, Next: &ListNode{Val: 2, Next: &ListNode{Val: 3, Next: nil}}}
 	res := reverseList(list)
+	fmt.Printf("%v\n", res)
+	fmt.Printf("%+v\n", res)
+	fmt.Printf("%#v\n", res)
+	s, _ := json.Marshal(res)
+	fmt.Printf("%s\n", string(s))
+	s, _ = json.MarshalIndent(res, "", "\t")
+	fmt.Printf("%s\n", string(s))
 	res.Print()
 }
 func reverseBetween(head *ListNode, left, right int) *ListNode {
